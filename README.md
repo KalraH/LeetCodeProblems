@@ -1,1 +1,3 @@
-# LeetCodeProblems
+# LeetCode Solutions by [Hariom Kalra]
+
+🚀 A collection of meticulously crafted LeetCode solutions, showcasing my problem-solving skills and determination. I've tackled these challenges head-on, and while some were conquered with the help of online resources, each solution bears my dedication and commitment to mastering algorithms and data structures. Dive into this repository and explore the journey of a passionate coder on the quest for excellence. 💡 <b>#LeetCodeChampion</b> 💪`
