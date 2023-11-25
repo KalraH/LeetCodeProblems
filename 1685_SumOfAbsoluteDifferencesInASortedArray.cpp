@@ -1,17 +1,17 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
 /**
- * @brief Approach-1: T: O(N^2), S: O(1)
- * 
- * @details Simple Brute-Force. 
- * 
+ * @brief Approach-1: T: O(N^2), S: O(N)
+ *
+ * @details Simple Brute-Force.
+ *
  * Just traverse over the entire array & at each index, calculate the diff of the value on current index with all array elements.
-*/
-class Solution 
+ */
+class Solution
 {
 public:
-	vector<int> getSumAbsoluteDifferences(vector<int>& nums) 
+	vector<int> getSumAbsoluteDifferences(vector<int> &nums)
 	{
 		int N = nums.size();
 		vector<int> result(N, 0);
@@ -20,7 +20,7 @@ public:
 		for (int i = 0; i < N; i++)
 		{
 			for (int j = 0; j < N; j++)
-				result[k] += abs( nums[i] - nums[j] );
+				result[k] += abs(nums[i] - nums[j]);
 			k++;
 		}
 		return result;
@@ -28,30 +28,30 @@ public:
 };
 
 /**
- * @brief Approach-2: T: O(2N), S: O(2N)
- * 
+ * @brief Approach-2: T: O(2N), S: O(3N)
+ *
  * @details Using Suffix & Prefix Sum Arrays with the formula derived after few twikes.
- * 
+ *
  * The way to derive below formula is to consier the value which we need to get at any index i, which is:
  * 	result[i] = (nums[i] - nums[0]) + (nums[i] - nums[1]) + ....... + (nums[i] - nums[i-1]) + (nums[i+1] - nums[i]) + (nums[i+2] - nums[i]) + ....... + (nums[N-1] - nums[i])
  * Simplifying the above formula we get:
  * 	result[i] = (nums[i] * i) - {nums[0] + nums[1] + .... + nums[i-1]} + {nums[i+1] + nums[i+2] + .... + nums[N-1]} - {nums[i] * (N - i - 1)}
  * 	result[i] = (nums[i] * i) - {		Prefix Sum 		 } + {		    Suffix Sum		      } - {nums[i] * (N - i - 1)}
- * 
+ *
  * Further Simplification gives: 	result[i] === {nums[i] * (2i + 1 - N)} - {Prefix Sum} + {Suffix Sum}
-*/
-class Solution 
+ */
+class Solution
 {
 public:
-	vector<int> getSumAbsoluteDifferences(vector<int>& nums) 
+	vector<int> getSumAbsoluteDifferences(vector<int> &nums)
 	{
 		int N = nums.size();
 
 		int i = 0, j = N - 1;
 		int preSum = 0, sufSum = 0;
 		vector<int> prefixSum(N, 0), suffixSum(N, 0);
-		
-		// Creating Prefix-Sum & Suffix-Sum Arrays
+
+		// Creating Prefix-Sum & Suffix-Sum Arrays.
 		while (i < N && j >= 0)
 		{
 			prefixSum[i] = preSum;
@@ -60,10 +60,11 @@ public:
 			suffixSum[j] = sufSum;
 			sufSum += nums[j--];
 		}
-		
+
+		// Creating Result Array using formula.
 		vector<int> result(N, 0);
 		for (int i = 0; i < N; i++)
-			result[i] = ( (nums[i] * (2*i + 1 - N) ) + suffixSum[i] - prefixSum[i] );
+			result[i] = ((nums[i] * (2 * i + 1 - N)) + suffixSum[i] - prefixSum[i]);
 
 		return result;
 	}
