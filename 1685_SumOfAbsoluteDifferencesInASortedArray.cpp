@@ -1,25 +1,23 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include <incLibs.h>
 
 /**
- * @brief Approach-1: T: O(N^2), S: O(N)
+ * @brief 	Approach-1: T: O(N^2), S: O(N)
  *
- * @details Simple Brute-Force.
- *
- * Just traverse over the entire array & at each index, calculate the diff of the value on current index with all array elements.
+ * @details 	Simple Brute-Force.
+ * 		Just traverse over the entire array & at each index, calculate the diff of the value on current index with all array elements.
  */
 class Solution
 {
 public:
 	vector<int> getSumAbsoluteDifferences(vector<int> &nums)
 	{
-		int N = nums.size();
-		vector<int> result(N, 0);
+		int32_t N = nums.size();
+		vector<int32_t> result(N, 0);
 
-		int k = 0;
-		for (int i = 0; i < N; i++)
+		int32_t k = 0;
+		for (int32_t i = 0; i < N; i++)
 		{
-			for (int j = 0; j < N; j++)
+			for (int32_t j = 0; j < N; j++)
 				result[k] += abs(nums[i] - nums[j]);
 			k++;
 		}
@@ -28,28 +26,28 @@ public:
 };
 
 /**
- * @brief Approach-2: T: O(2N), S: O(3N)
+ * @brief 	Approach-2: T: O(2N), S: O(3N)
  *
- * @details Using Suffix & Prefix Sum Arrays with the formula derived after few twikes.
+ * @details 	Using Suffix & Prefix Sum Arrays with the formula derived after few twikes.
  *
- * The way to derive below formula is to consier the value which we need to get at any index i, which is:
- * 	result[i] = (nums[i] - nums[0]) + (nums[i] - nums[1]) + ....... + (nums[i] - nums[i-1]) + (nums[i+1] - nums[i]) + (nums[i+2] - nums[i]) + ....... + (nums[N-1] - nums[i])
- * Simplifying the above formula we get:
- * 	result[i] = (nums[i] * i) - {nums[0] + nums[1] + .... + nums[i-1]} + {nums[i+1] + nums[i+2] + .... + nums[N-1]} - {nums[i] * (N - i - 1)}
- * 	result[i] = (nums[i] * i) - {		Prefix Sum 		 } + {		    Suffix Sum		      } - {nums[i] * (N - i - 1)}
+ * 		The way to derive below formula is to consier the value which we need to get at any index i, which is:
+ * 			result[i] = (nums[i] - nums[0]) + (nums[i] - nums[1]) + ....... + (nums[i] - nums[i-1]) + (nums[i+1] - nums[i]) + (nums[i+2] - nums[i]) + ....... + (nums[N-1] - nums[i])
+ * 		Simplifying the above formula we get:
+ * 			result[i] = (nums[i] * i) - {nums[0] + nums[1] + .... + nums[i-1]} + {nums[i+1] + nums[i+2] + .... + nums[N-1]} - {nums[i] * (N - i - 1)}
+ * 			result[i] = (nums[i] * i) - {		Prefix Sum 		 } + {		    Suffix Sum		      } - {nums[i] * (N - i - 1)}
  *
- * Further Simplification gives: 	result[i] === {nums[i] * (2i + 1 - N)} - {Prefix Sum} + {Suffix Sum}
+ * 		Further Simplification gives: 		result[i] === {nums[i] * (2i + 1 - N)} - {Prefix Sum} + {Suffix Sum}
  */
 class Solution
 {
 public:
 	vector<int> getSumAbsoluteDifferences(vector<int> &nums)
 	{
-		int N = nums.size();
+		int32_t N = nums.size();
 
-		int i = 0, j = N - 1;
-		int preSum = 0, sufSum = 0;
-		vector<int> prefixSum(N, 0), suffixSum(N, 0);
+		int32_t i = 0, j = (N - 1);
+		int32_t preSum = 0, sufSum = 0;
+		vector<int32_t> prefixSum(N, 0), suffixSum(N, 0);
 
 		// Creating Prefix-Sum & Suffix-Sum Arrays.
 		while (i < N && j >= 0)
@@ -62,8 +60,8 @@ public:
 		}
 
 		// Creating Result Array using formula.
-		vector<int> result(N, 0);
-		for (int i = 0; i < N; i++)
+		vector<int32_t> result(N, 0);
+		for (int32_t i = 0; i < N; i++)
 			result[i] = ((nums[i] * (2 * i + 1 - N)) + suffixSum[i] - prefixSum[i]);
 
 		return result;
