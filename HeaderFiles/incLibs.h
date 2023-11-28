@@ -7,6 +7,7 @@
 #include <cmath>
 #include <string>
 #include <vector>
+#include<stdint.h>
 #include <iostream>
 #include <algorithm>
 #include <unordered_map>

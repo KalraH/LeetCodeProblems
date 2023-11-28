@@ -1,10 +1,11 @@
-#include <incLibs.h>
+#include "../HeaderFiles/incLibs.h"
 
 /**
  * @brief 	Approach-1: T: O(N^2), S: O(N)
  *
- * @details 	Simple Brute-Force.
- * 		Just traverse over the entire array & at each index, calculate the diff of the value on current index with all array elements.
+ * @def 	Simple Brute-Force.
+ * 
+ * @details 	Just traverse over the entire array & at each index, calculate the diff of the value on current index with all array elements.
  */
 class Solution
 {
@@ -28,9 +29,9 @@ public:
 /**
  * @brief 	Approach-2: T: O(2N), S: O(3N)
  *
- * @details 	Using Suffix & Prefix Sum Arrays with the formula derived after few twikes.
+ * @def 	Using Suffix & Prefix Sum Arrays with the formula derived after few twikes.
  *
- * 		The way to derive below formula is to consier the value which we need to get at any index i, which is:
+ * @details	The way to derive below formula is to consier the value which we need to get at any index i, which is:
  * 			result[i] = (nums[i] - nums[0]) + (nums[i] - nums[1]) + ....... + (nums[i] - nums[i-1]) + (nums[i+1] - nums[i]) + (nums[i+2] - nums[i]) + ....... + (nums[N-1] - nums[i])
  * 		Simplifying the above formula we get:
  * 			result[i] = (nums[i] * i) - {nums[0] + nums[1] + .... + nums[i-1]} + {nums[i+1] + nums[i+2] + .... + nums[N-1]} - {nums[i] * (N - i - 1)}
@@ -38,7 +39,7 @@ public:
  *
  * 		Further Simplification gives: 		result[i] === {nums[i] * (2i + 1 - N)} - {Prefix Sum} + {Suffix Sum}
  */
-class Solution
+class Solution1
 {
 public:
 	vector<int> getSumAbsoluteDifferences(vector<int> &nums)
