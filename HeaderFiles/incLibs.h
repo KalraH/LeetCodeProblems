@@ -7,6 +7,7 @@
 #include <cmath>
 #include <string>
 #include <vector>
+#include <bitset>
 #include<stdint.h>
 #include <iostream>
 #include <algorithm>
