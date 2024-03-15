@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 #include <bitset>
-#include<stdint.h>
+#include <stdint.h>
 #include <iostream>
 #include <algorithm>
 #include <unordered_map>
