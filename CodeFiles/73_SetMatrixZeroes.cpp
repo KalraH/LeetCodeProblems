@@ -34,11 +34,8 @@ public:
 				if (matrix[i][j] != 0)
 					continue;
 
-				if (matrix[i][j] == 0)
-				{
-					setRowZero(i, matrix);
-					setColumnZero(j, matrix);
-				}
+				setRowZero(i, matrix);
+				setColumnZero(j, matrix);
 			}
 		}
 
