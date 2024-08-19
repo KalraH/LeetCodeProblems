@@ -1,7 +1,7 @@
 #include "../HeaderFiles/incLibs.h"
 
 /**
- * @brief 	Approach-1: T: O(), S: O()
+ * @brief 	Approach-1: T: O(N), S: O(1)
  *
  * @def		Basic Intution to maximize profit at every sell.
  *
